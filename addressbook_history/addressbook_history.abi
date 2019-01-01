@@ -1,0 +1,88 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Tue Jan  1 18:41:34 2019",
+    "version": "eosio::abi/1.0",
+    "structs": [
+        {
+            "name": "create",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                },
+                {
+                    "name": "addressbook_id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "history_type",
+                    "type": "string"
+                },
+                {
+                    "name": "history_content",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "destroy",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "history",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "addressbook_id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "user",
+                    "type": "string"
+                },
+                {
+                    "name": "history_type",
+                    "type": "string"
+                },
+                {
+                    "name": "history_content",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "types": [],
+    "actions": [
+        {
+            "name": "create",
+            "type": "create",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "destroy",
+            "type": "destroy",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "histories",
+            "type": "history",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "abi_extensions": []
+}
