@@ -15,8 +15,9 @@ class [[eosio::contract]] addressbook : public eosio::contract {
             require_auth(user);
 
             // マルチインデックステーブルのインスタンスを作成
-            // 第一引数：_code スマートコントラクトのアカウント
-            // 第二引数：user.value スコープ
+            // 第一引数：_code コントラクトアカウント
+            // 第二引数：user.value スコープ（絞り込み条件）
+            // cleos get table の第一引数、第二引数に相当
             address_index addresses(_code, user.value);
             auto new_id = addresses.available_primary_key();
 
@@ -86,13 +87,13 @@ class [[eosio::contract]] addressbook : public eosio::contract {
         void create_history(name user, uint64_t addressbook_id, string history_type, string history_content) {
             
             // 第一引数：呼び出しに使う権限レベル（eosio.codeにactive権限を許可)
-            // 第二引数：呼び出し先のアカウント
+            // 第二引数：呼び出し先のコントラクトアカウント（ネットワークによって異なる場合は注意）
             // 第三引数：呼び出し先のアクション
             // 第四引数：呼び出し先アクションに渡す引数
             action(
                 permission_level{get_self(), "active"_n},
-                name{"history"},
 //                name{"eosbkhistory"},
+                name{"history"}, // contract account name
                 "create"_n,
                 std::make_tuple(user, addressbook_id, history_type, history_content)
             ).send();

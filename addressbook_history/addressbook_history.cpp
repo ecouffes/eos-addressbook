@@ -13,12 +13,15 @@ class [[eosio::contract]] addressbook_history : public eosio::contract {
         [[eosio::action]]
         // history_typeはcreateとかupdateとか
         void create(name user, uint64_t addressbook_id, string history_type, string history_content) {
-            require_auth(name{"addressbook"});
+
+            // addressbookコントラクトのコントラクトアカウント名で実行制限
+            require_auth(name{"addressbook"});  // contract account name
 //            require_auth(name{"eosaddressbk"});
 
             // マルチインデックステーブルのインスタンスを作成
-            // 第一引数：_code スマートコントラクトのアカウント
-            // 第二引数：_code.value スコープ
+            // 第一引数：_code コントラクトアカウント
+            // 第二引数：_code.value スコープ（絞り込み条件）
+            // cleos get table の第一引数、第二引数に相当
             history_index histories(_code, _code.value);
 
             histories.emplace(_code, [&](auto &row) {
@@ -33,7 +36,9 @@ class [[eosio::contract]] addressbook_history : public eosio::contract {
         // マルチインデックステーブルのデータ削除
         [[eosio::action]]
         void destroy(uint64_t id) {
-            require_auth(name{"addressbook"});
+
+            // addressbookコントラクトのコントラクトアカウント名で実行制限
+            require_auth(name{"addressbook"});  // contract account name
 //            require_auth(name{"eosaddressbk"});
 
             history_index histories(_code, _code.value);
