@@ -15,8 +15,7 @@ class [[eosio::contract]] addressbook_history : public eosio::contract {
         void create(name user, uint64_t addressbook_id, string history_type, string history_content) {
 
             // addressbookコントラクトのコントラクトアカウント名で実行制限
-            require_auth(name{"addressbook"});  // contract account name
-//            require_auth(name{"eosaddressbk"});
+            require_auth(name{"eosaddressbk"}); // contract account name
 
             // マルチインデックステーブルのインスタンスを作成
             // 第一引数：_code コントラクトアカウント
@@ -38,8 +37,7 @@ class [[eosio::contract]] addressbook_history : public eosio::contract {
         void destroy(uint64_t id) {
 
             // addressbookコントラクトのコントラクトアカウント名で実行制限
-            require_auth(name{"addressbook"});  // contract account name
-//            require_auth(name{"eosaddressbk"});
+            require_auth(name{"eosaddressbk"}); // contract account name
 
             history_index histories(_code, _code.value);
             auto iterator = histories.find(id);
@@ -66,4 +64,5 @@ class [[eosio::contract]] addressbook_history : public eosio::contract {
         typedef eosio::multi_index<"histories"_n, history> history_index;
 };
 
+// dispathにcreate, update, destroy アクションを追加
 EOSIO_DISPATCH(addressbook_history, (create)(destroy))

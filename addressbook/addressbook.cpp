@@ -92,8 +92,7 @@ class [[eosio::contract]] addressbook : public eosio::contract {
             // 第四引数：呼び出し先アクションに渡す引数
             action(
                 permission_level{get_self(), "active"_n},
-//                name{"eosbkhistory"},
-                name{"history"}, // contract account name
+                name{"eosbkhistory"}, // contract account name
                 "create"_n,
                 std::make_tuple(user, addressbook_id, history_type, history_content)
             ).send();
