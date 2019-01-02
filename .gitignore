@@ -1,2 +1,6 @@
 # IDE
 .idea
+
+# ABI & WASM
+**/*.abi
+**/*.wasm
